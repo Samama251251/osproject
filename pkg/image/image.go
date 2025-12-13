@@ -2,12 +2,14 @@ package image
 
 import (
 	"encoding/json"
+	"io/ioutil"
+	"os"
+	"runtime"
+	"strings"
+
 	"github.com/google/go-containerregistry/pkg/crane"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
-	"io/ioutil"
-	"os"
-	"strings"
 )
 
 const (
@@ -32,7 +34,12 @@ func NewImage(src string) (*Image, error) {
 	if err != nil {
 		return nil, err
 	}
-	img, err := crane.Pull(tag.Name())
+	// Specify platform to match host architecture (arm64 for M4 Mac)
+	platform := v1.Platform{
+		Architecture: runtime.GOARCH,
+		OS:           runtime.GOOS,
+	}
+	img, err := crane.Pull(tag.Name(), crane.WithPlatform(&platform))
 	if err != nil {
 		return nil, err
 	}

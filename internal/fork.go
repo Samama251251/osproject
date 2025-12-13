@@ -1,12 +1,13 @@
 package internal
 
 import (
-	"github.com/0xc0d/vessel/pkg/container"
-	"github.com/0xc0d/vessel/pkg/filesystem"
-	"github.com/pkg/errors"
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/0xc0d/vessel/pkg/container"
+	"github.com/0xc0d/vessel/pkg/filesystem"
+	"github.com/pkg/errors"
 )
 
 // Fork will call by Run. It is a hack to fork a whole new Go process
@@ -73,7 +74,7 @@ func runCommand(cmd *exec.Cmd, detach bool) error {
 	if detach {
 		return cmd.Process.Release()
 	}
-	
+
 	return cmd.Wait()
 }
 
