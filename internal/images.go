@@ -2,7 +2,7 @@ package internal
 
 import (
 	"fmt"
-	"github.com/0xc0d/vessel/pkg/image"
+	"github.com/samama/firaaq/pkg/image"
 	"github.com/spf13/cobra"
 )
 

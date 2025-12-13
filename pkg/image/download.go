@@ -2,7 +2,7 @@ package image
 
 import (
 	"encoding/json"
-	"github.com/0xc0d/vessel/pkg/archive"
+	"github.com/samama/firaaq/pkg/archive"
 	"os"
 	"path/filepath"
 )

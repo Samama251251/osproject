@@ -1,14 +1,14 @@
 package container
 
 import (
-	"github.com/0xc0d/vessel/pkg/cgroups"
+	"github.com/samama/firaaq/pkg/cgroups"
 	"path/filepath"
 )
 
 // LoadCGroups loads CGroups for container.
 func (c *Container) LoadCGroups() error {
 	cg := cgroups.NewCGroup()
-	cg.SetPath(filepath.Join("vessel", c.Digest)).
+	cg.SetPath(filepath.Join("firaaq", c.Digest)).
 		SetMemorySwapLimit(c.mem, c.swap).
 		SetCPULimit(c.cpus).
 		SetProcessLimit(c.pids)
@@ -26,7 +26,7 @@ func (c *Container) LoadCGroups() error {
 // It only function if the container is not running.
 func (c *Container) removeCGroups() error {
 	cg := &cgroups.CGroups{
-		Path: filepath.Join("vessel", c.Digest),
+		Path: filepath.Join("firaaq", c.Digest),
 	}
 	return cg.Remove()
 }
@@ -55,7 +55,7 @@ func (c *Container) SetProcessLimit(pids int) *Container {
 // NOTE: First element [0], is the fork process.
 func (c *Container) GetPids() ([]int, error) {
 	cg := &cgroups.CGroups{
-		Path: filepath.Join("vessel", c.Digest),
+		Path: filepath.Join("firaaq", c.Digest),
 	}
 	pids, err := cg.GetPids()
 	return pids, err
@@ -65,7 +65,7 @@ func (c *Container) GetPids() ([]int, error) {
 // Container should be specified by its digest.
 func getPidsByDigest(digest string) ([]int, error) {
 	cg := &cgroups.CGroups{
-		Path: filepath.Join("vessel", digest),
+		Path: filepath.Join("firaaq", digest),
 	}
 	pids, err := cg.GetPids()
 	return pids, err

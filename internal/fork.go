@@ -5,9 +5,9 @@ import (
 	"os/exec"
 	"syscall"
 
-	"github.com/0xc0d/vessel/pkg/container"
-	"github.com/0xc0d/vessel/pkg/filesystem"
 	"github.com/pkg/errors"
+	"github.com/samama/firaaq/pkg/container"
+	"github.com/samama/firaaq/pkg/filesystem"
 )
 
 // Fork will call by Run. It is a hack to fork a whole new Go process

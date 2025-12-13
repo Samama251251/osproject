@@ -6,15 +6,15 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/0xc0d/vessel/pkg/filesystem"
-	"github.com/0xc0d/vessel/pkg/image"
+	"github.com/samama/firaaq/pkg/filesystem"
+	"github.com/samama/firaaq/pkg/image"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/pkg/errors"
 )
 
 const (
-	containerPath       = "/var/run/vessel/containers"
-	containerNetNsPath  = "/var/run/vessel/netns"
+	containerPath       = "/var/run/firaaq/containers"
+	containerNetNsPath  = "/var/run/firaaq/netns"
 	containerConfigFile = "config.json"
 	DigestStdLen        = 64
 	MB                  = 1 << 20

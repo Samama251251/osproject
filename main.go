@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/0xc0d/vessel/cmd"
+	"github.com/samama/firaaq/cmd"
 )
 
 func main() {
-	rootCmd := cmd.NewVesselCommand()
+	rootCmd := cmd.NewFiraaqCommand()
 	rootCmd.AddCommand(cmd.NewRunCommand())
 	rootCmd.AddCommand(cmd.NewForkCommand())
 	rootCmd.AddCommand(cmd.NewExecCommand())

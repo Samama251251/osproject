@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com/0xc0d/vessel/pkg/container"
-	"github.com/0xc0d/vessel/pkg/filesystem"
 	"github.com/pkg/errors"
+	"github.com/samama/firaaq/pkg/container"
+	"github.com/samama/firaaq/pkg/filesystem"
 	"golang.org/x/sys/unix"
 )
 

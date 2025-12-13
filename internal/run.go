@@ -2,10 +2,10 @@ package internal
 
 import (
 	"fmt"
-	"github.com/0xc0d/vessel/pkg/container"
-	"github.com/0xc0d/vessel/pkg/image"
-	"github.com/0xc0d/vessel/pkg/network"
-	"github.com/0xc0d/vessel/pkg/reexec"
+	"github.com/samama/firaaq/pkg/container"
+	"github.com/samama/firaaq/pkg/image"
+	"github.com/samama/firaaq/pkg/network"
+	"github.com/samama/firaaq/pkg/reexec"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -19,12 +19,12 @@ func Run(cmd *cobra.Command, args []string) error {
 	defer ctr.Remove()
 
 	// setup bridge
-	if err := network.SetupBridge("vessel0"); err != nil {
+	if err := network.SetupBridge("firaaq0"); err != nil {
 		return err
 	}
 
 	// setup network
-	deleteNetwork, err := ctr.SetupNetwork("vessel0")
+	deleteNetwork, err := ctr.SetupNetwork("firaaq0")
 	if err != nil {
 		return err
 	}

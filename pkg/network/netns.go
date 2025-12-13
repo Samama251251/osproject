@@ -1,7 +1,7 @@
 package network
 
 import (
-	"github.com/0xc0d/vessel/pkg/filesystem"
+	"github.com/samama/firaaq/pkg/filesystem"
 	"github.com/pkg/errors"
 	"github.com/vishvananda/netlink"
 	"golang.org/x/sys/unix"

@@ -2,8 +2,8 @@ package container
 
 import (
 	"fmt"
-	"github.com/0xc0d/vessel/pkg/filesystem"
-	"github.com/0xc0d/vessel/pkg/network"
+	"github.com/samama/firaaq/pkg/filesystem"
+	"github.com/samama/firaaq/pkg/network"
 	"path/filepath"
 	"strconv"
 )
@@ -14,7 +14,7 @@ func (c *Container) SetupNetwork(bridge string) (filesystem.Unmounter, error) {
 	nsMountTarget := filepath.Join(netnsPath, c.Digest)
 	vethName := fmt.Sprintf("veth%.7s", c.Digest)
 	peerName := fmt.Sprintf("P%s", vethName)
-	masterName := "vessel0"
+	masterName := "firaaq0"
 
 	if err := network.SetupVirtualEthernet(vethName, peerName); err != nil {
 		return nil, err

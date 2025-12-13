@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	RepoFile = "/var/lib/vessel/images/repositories.json"
-	LyrDir   = "/var/lib/vessel/images/layers"
+	RepoFile = "/var/lib/firaaq/images/repositories.json"
+	LyrDir   = "/var/lib/firaaq/images/layers"
 )
 
 type Image struct {

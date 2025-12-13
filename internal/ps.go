@@ -3,7 +3,7 @@ package internal
 import (
 	"bytes"
 	"fmt"
-	"github.com/0xc0d/vessel/pkg/container"
+	"github.com/samama/firaaq/pkg/container"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"path/filepath"

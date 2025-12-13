@@ -1,4 +1,4 @@
-module github.com/0xc0d/vessel
+module github.com/samama/firaaq
 
 go 1.15
 
