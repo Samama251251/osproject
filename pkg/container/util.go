@@ -21,6 +21,7 @@ func completeDigest(prefix string) (digest string) {
 	if len(prefix) == DigestStdLen {
 		return prefix
 	}
+	// Search the container directory for a matching digest when only a prefix is supplied.
 	list, err := ioutil.ReadDir(containerPath)
 	if err != nil {
 		return

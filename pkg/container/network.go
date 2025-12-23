@@ -10,6 +10,8 @@ import (
 
 const netnsPath = "/var/run/vessel/netns"
 
+// SetupNetwork creates a pair of veth interfaces and moves one end into the container namespace.
+// The bridge argument is retained for future flexibility but this implementation always uses firaaq0.
 func (c *Container) SetupNetwork(bridge string) (filesystem.Unmounter, error) {
 	nsMountTarget := filepath.Join(netnsPath, c.Digest)
 	vethName := fmt.Sprintf("veth%.7s", c.Digest)
@@ -63,6 +65,8 @@ func (c *Container) SetNetworkNamespace() (network.Unsetter, error) {
 	return network.SetNetNSByFile(netns)
 }
 
+// GetIP derives a stable IP in the 172.30.0.0/16 range from the container digest.
+// This keeps networking deterministic while avoiding collisions for the short-lived network.
 func (c *Container) GetIP() string {
 	a, _ := strconv.ParseInt(c.Digest[:2], 10, 64)
 	b, _ := strconv.ParseInt(c.Digest[62:], 10, 64)

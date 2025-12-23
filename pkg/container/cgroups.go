@@ -7,6 +7,7 @@ import (
 
 // LoadCGroups loads CGroups for container.
 func (c *Container) LoadCGroups() error {
+	// Build the cgroup tree under firaaq/<digest> before applying limits.
 	cg := cgroups.NewCGroup()
 	cg.SetPath(filepath.Join("firaaq", c.Digest)).
 		SetMemorySwapLimit(c.mem, c.swap).
@@ -25,6 +26,7 @@ func (c *Container) LoadCGroups() error {
 // RemoveCGroups removes CGroups file for container.
 // It only function if the container is not running.
 func (c *Container) removeCGroups() error {
+	// The container should not be running when the control group tree is deleted.
 	cg := &cgroups.CGroups{
 		Path: filepath.Join("firaaq", c.Digest),
 	}

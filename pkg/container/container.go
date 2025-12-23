@@ -74,6 +74,7 @@ func (c *Container) MountFromImage(img *image.Image) (filesystem.Unmounter, erro
 
 	imgLayers, err := img.Layers()
 	layers := make([]string, 0)
+	// Record the layers in base-to-top order so overlayfs merges them predictably.
 	for i := range imgLayers {
 		digest, err := imgLayers[i].Digest()
 		if err != nil {
@@ -90,6 +91,7 @@ func (c *Container) MountFromImage(img *image.Image) (filesystem.Unmounter, erro
 		return unmounter, err
 	}
 
+	// Persist the image config so subsequent loads can rehydrate the container state.
 	return unmounter, c.copyImageConfig(img)
 }
 
