@@ -1,19 +1,14 @@
-# firaaq
+# firaq
 A tiny educational-purpose project to create containers, written in Go.
 
 It basically is a tiny version of docker, it uses neither [containerd](https://containerd.io/) nor [runc](https://github.com/opencontainers/runc). Only a set of the Linux features.
 
 ## Features
-Vessel supports:
+firaq supports:
 * __Control Groups__ for resource restriction (CPU, Memory, Swap, PIDs)
 * __Namespace__ for global system resources isolation (Mount, UTS, Network, IPS, PID)
 * __Union File System__ for branches to be overlaid in a single coherent file system. (OverlayFS)
 
-## Read more
-Here is the list of blog posts about container implementation:
-
-1. [Build Containers From Scratch in Go (Part 1: Namespaces)](https://alijosie.medium.com/build-containers-from-scratch-in-go-part-1-namespaces-c07d2291038b)
-2. To be continued...
 
 ## Install
 
@@ -35,20 +30,20 @@ Here is the list of blog posts about container implementation:
 
 Run `/bin/sh` in `alpine:latest`
 
-    firaaq run alpine /bin/sh
-    firaaq run alpine # same as above due to alpine default command
+    firaq run alpine /bin/sh
+    firaq run alpine # same as above due to alpine default command
 
 Restart Nginx service inside a container with ID: 123456789123
 
-    firaaq exec 1234567879123 systemctrl restart nginx
+    firaq exec 1234567879123 systemctrl restart nginx
     
 List running containers
 
-    firaaq ps
+    firaq ps
     
 List local images
 
-    firaaq images
+    firaq images
 
 ## Notice
-firaaq, obviously, is not a production ready container manager tool. 
+firaq, obviously, is not a production ready container manager tool. 
