@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Images gets all available local images and prints them.
+// Images: It gets all available local images and prints them.
 func Images(_ *cobra.Command, _ []string) error {
 	imgs, err := image.GetAll()
 	if err != nil {
@@ -16,7 +16,7 @@ func Images(_ *cobra.Command, _ []string) error {
 	pPrintImages(imgs)
 	return nil
 }
-
+// pPrintImages: prints images in a formatted way.
 func pPrintImages(imgs []*image.Image) {
 	fmt.Println("REPOSITORY\t\t\tTAG\t\tIMAGE ID")
 	for _, img := range imgs {

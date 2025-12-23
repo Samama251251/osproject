@@ -13,7 +13,7 @@ import (
 	"syscall"
 )
 
-// Run runs a command inside a new container.
+// Run: runs a command inside a new container.
 func Run(cmd *cobra.Command, args []string) error {
 	ctr := container.NewContainer()
 	defer ctr.Remove()
@@ -75,8 +75,7 @@ func rawFlags(flags *pflag.FlagSet) []string {
 	return flagList
 }
 
-// getImage pulls an image and download its layers if it image
-// does not exist locally.
+// getImage: pulls an image and download its layers if it image does not exist locally.
 func getImage(src string) (*image.Image, error) {
 	img, err := image.NewImage(src)
 	if err != nil {

@@ -4,17 +4,13 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
-
 	"github.com/pkg/errors"
 	"github.com/samama/firaaq/pkg/container"
 	"github.com/samama/firaaq/pkg/filesystem"
 )
 
-// Fork will call by Run. It is a hack to fork a whole new Go process
-// inside a new namespace.
-//
-// If detach was enable function returns immediately after starting
-// the command and never wait for result
+// Fork will call by Run. It is a hack to fork a whole new Go process inside a new namespace.
+// If detach was enable function returns immediately after starting the command and never wait for result
 func Fork(ctr *container.Container, args []string, detach bool) error {
 	ctr.SetHostname()
 	// set network

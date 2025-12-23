@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-// Ps gets all running containers and prints them.
+// Ps: gets all running containers and prints them.
 func Ps(_ *cobra.Command, _ []string) error {
 	allCtr, err := container.GetAllContainers()
 	if err != nil {
