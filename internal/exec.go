@@ -35,6 +35,7 @@ func Exec(ctrDigest string, args []string, detach bool) error {
 		return err
 	}
 
+	// Mount the proc and sysfs pseudo-filesystems into the container namespace.
 	mountPoints := []filesystem.MountOption{
 		{Source: "proc", Target: "proc", Type: "proc"},
 		{Source: "sysfs", Target: "sys", Type: "sysfs"},

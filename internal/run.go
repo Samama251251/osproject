@@ -41,7 +41,7 @@ func Run(cmd *cobra.Command, args []string) error {
 	}
 	defer unmount()
 
-	// Format fork options
+	// Format fork options so the child process sees the same runtime flags plus mount info.
 	options := append([]string{}, rawFlags(cmd.Flags())...)
 	options = append(options, fmt.Sprintf("--root=%s", ctr.RootFS))
 	options = append(options, fmt.Sprintf("--container=%s", ctr.Digest))
@@ -49,6 +49,7 @@ func Run(cmd *cobra.Command, args []string) error {
 	newArgs = append(newArgs, options...)
 	newArgs = append(newArgs, args[1:]...)
 	newCmd := reexec.Command(newArgs...)
+	// Re-execute ourselves inside the fork helper so the namespaces are applied correctly.
 	newCmd.Stdin, newCmd.Stdout, newCmd.Stderr = os.Stdin, os.Stdout, os.Stderr
 	newCmd.SysProcAttr = &syscall.SysProcAttr{
 		Cloneflags: syscall.CLONE_NEWNS |

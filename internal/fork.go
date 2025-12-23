@@ -28,6 +28,7 @@ func Fork(ctr *container.Container, args []string, detach bool) error {
 	}
 
 	// Mount necessaries
+	// This ensures proc and sysfs are present once we chroot.
 	mountPoints := []filesystem.MountOption{
 		{Source: "proc", Target: "proc", Type: "proc"},
 		{Source: "sysfs", Target: "sys", Type: "sysfs"},
