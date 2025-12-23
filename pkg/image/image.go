@@ -60,6 +60,7 @@ func NewImage(src string) (*Image, error) {
 
 // Exists checks for image existence in local storage.
 func (i *Image) Exists() (bool, error) {
+	// Build current repository cache before checking for this digest.
 	images, err := GetAll()
 	if err != nil {
 		return false, err
@@ -88,6 +89,7 @@ func GetAll() ([]*Image, error) {
 		return nil, err
 	}
 
+	// Expand repositories.json entries into Image structs so callers can inspect them.
 	for repo, image := range repos {
 		for nameTag, hash := range image {
 			newImg := &Image{

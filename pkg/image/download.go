@@ -12,6 +12,7 @@ type Repositories map[string]Repository
 
 // Download downloads image's layers.
 func (i *Image) Download() error {
+	// Extract each layer into a dedicated directory so overlayfs can consume it later.
 	layers, err := i.Layers()
 	if err != nil {
 		return err
@@ -33,6 +34,7 @@ func (i *Image) Download() error {
 			return err
 		}
 	}
+	// Persist the repository metadata after all layers are in place.
 	return i.addToRepositories()
 }
 
@@ -41,6 +43,7 @@ func (i *Image) Download() error {
 // after downloading image's layer, call this function to prevent
 // further duplicate downloads.
 func (i *Image) addToRepositories() error {
+	// Work through repositories.json so we do not re-download the same digest twice.
 	file, err := os.OpenFile(RepoFile, os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		return err

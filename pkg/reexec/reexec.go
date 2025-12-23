@@ -7,6 +7,7 @@ import (
 )
 
 func naiveSelf() string {
+	// naiveSelf returns the absolute binary path to re-exec the current process.
 	name := os.Args[0]
 	if filepath.Base(name) == name {
 		if lp, err := exec.LookPath(name); err == nil {

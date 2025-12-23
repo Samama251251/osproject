@@ -85,6 +85,7 @@ func (cg *CGroups) SetProcessLimit(number int) *CGroups {
 
 // Load affects CGroups.
 func (cg *CGroups) Load() error {
+	// Establish controller directories and submit the current pid before applying limits.
 	if err := cg.createControllersDir(); err != nil {
 		return err
 	}
@@ -127,6 +128,7 @@ func (cg *CGroups) Remove() error {
 func (cg *CGroups) GetPids() ([]int, error) {
 	var pids []int
 
+	// Read the cgroup.procs file to surface the tracked PIDs.
 	proc := filepath.Join(cgroupPath, controllers[0], cg.Path, procsFilename)
 	procFile, err := os.Open(proc)
 	if err != nil {
