@@ -67,7 +67,7 @@ func (c *Container) Remove() error {
 func (c *Container) MountFromImage(img *image.Image) (filesystem.Unmounter, error) {
 	target := filepath.Join(containerPath, c.Digest, "mnt")
 	if err := os.MkdirAll(target, 0700); err != nil {
-		return nil, errors.Wrapf(err, "can't create %s directory", target)
+		return nil, errors.Wrapf(err, "can not create %s directory", target)
 	}
 
 	c.RootFS = target
@@ -149,7 +149,7 @@ func GetAllContainers() ([]*Container, error) {
 func GetContainerByDigest(digest string) (*Container, error) {
 	ctrDigest := completeDigest(digest)
 	if len(ctrDigest) != DigestStdLen {
-		return nil, errors.Errorf("No such container: %s", digest)
+		return nil, errors.Errorf("No such container exist: %s", digest)
 	}
 
 	config, err := getConfigByDigest(ctrDigest)

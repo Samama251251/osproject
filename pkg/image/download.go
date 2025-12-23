@@ -37,7 +37,7 @@ func (i *Image) Download() error {
 }
 
 // addToRepositories adds a image to repository.
-//
+
 // after downloading image's layer, call this function to prevent
 // further duplicate downloads.
 func (i *Image) addToRepositories() error {

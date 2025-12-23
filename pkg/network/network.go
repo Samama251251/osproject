@@ -57,11 +57,11 @@ func SetupVirtualEthernet(name, peer string) error {
 func LinkSetMaster(linkName, masterName string) error {
 	link, err := netlink.LinkByName(linkName)
 	if err != nil {
-		return errors.Wrapf(err, "can't find link %s", linkName)
+		return errors.Wrapf(err, "can not find link %s", linkName)
 	}
 	masterLink, err := netlink.LinkByName(masterName)
 	if err != nil {
-		return errors.Wrapf(err, "can't find link %s", masterName)
+		return errors.Wrapf(err, "can not find link %s", masterName)
 	}
 	if err := netlink.LinkSetMaster(link, masterLink); err != nil {
 		return err
@@ -90,7 +90,7 @@ func LinkAddAddr(linkName, IP string) error {
 	}
 	addr, err := netlink.ParseAddr(IP)
 	if err != nil {
-		return errors.Wrapf(err, "can't parse %s", IP)
+		return errors.Wrapf(err, "can not parse %s", IP)
 	}
 	return netlink.AddrAdd(link, addr)
 }
