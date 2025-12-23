@@ -6,6 +6,7 @@ import (
 	"net"
 )
 
+// SetupBridge ensures the bridge exists, assigns the gateway IP, and brings it up.
 func SetupBridge(name string) error {
 	// Create Bridge if does not exist
 	bridge, err := netlink.LinkByName(name)
@@ -41,6 +42,7 @@ func SetupBridge(name string) error {
 	return nil
 }
 
+// SetupVirtualEthernet creates and activates a veth pair for container attachment.
 func SetupVirtualEthernet(name, peer string) error {
 	linkAttrs := netlink.NewLinkAttrs()
 	linkAttrs.Name = name

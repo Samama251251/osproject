@@ -13,6 +13,7 @@ import (
 func OverlayMount(target string, src []string, readOnly bool) (Unmounter, error) {
 	var upper, work []string
 	if !readOnly {
+		// Writable overlay requires separate upper and work directories beside the target.
 		// Create Upper and Work Directories for writable Mount
 		parentDir := filepath.Dir(strings.TrimRight(target, "/"))
 		upperDir := filepath.Join(parentDir, "diff")
@@ -40,6 +41,7 @@ func OverlayMount(target string, src []string, readOnly bool) (Unmounter, error)
 }
 
 // formatOverlayFsMountOption returns formatted overlayFS mount option.
+// It combines lower, upper, and work directories into a single comma-separated string.
 func formatOverlayFsMountOption(lowerDir, upperDir, workDir []string) string {
 	lower := "lowerdir="
 	lower += strings.Join(lowerDir, ":")

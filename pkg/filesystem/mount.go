@@ -18,6 +18,7 @@ type Unmounter func() error
 
 // Mount mounts list of mountOptions and returns a function to unmount them.
 func Mount(mountOpts ...MountOption) (Unmounter, error) {
+	// unmount will walk the options in the same order to prevent dangling mounts.
 	unmounter := func() error {
 		for _, p := range mountOpts {
 			if err := syscall.Unmount(p.Target, 0); err != nil {

@@ -11,6 +11,8 @@ import (
 
 type Unsetter func() error
 
+// MountNewNetworkNamespace creates a new netns file and mounts the current namespace onto it.
+// It also restores the original namespace before returning so callers can proceed.
 func MountNewNetworkNamespace(nsTarget string) (filesystem.Unmounter, error) {
 	_, err := os.OpenFile(nsTarget, syscall.O_RDONLY|syscall.O_CREAT|syscall.O_EXCL, 0644)
 	if err != nil {
@@ -46,6 +48,8 @@ func MountNewNetworkNamespace(nsTarget string) (filesystem.Unmounter, error) {
 	return unmount, nil
 }
 
+// SetNetNSByFile switches the process into the namespace described by filename.
+// The returned unsetter re-enters the namespace held at /proc/self/ns/net.
 func SetNetNSByFile(filename string) (Unsetter, error) {
 	currentNS, err := os.OpenFile("/proc/self/ns/net", os.O_RDONLY, 0)
 	unsetFunc := func() error {
@@ -67,6 +71,7 @@ func SetNetNSByFile(filename string) (Unsetter, error) {
 	return unsetFunc, err
 }
 
+// LinkSetNsByFile moves the provided link into the netns represented by filename.
 func LinkSetNsByFile(filename, linkName string) error {
 	netnsFile, err := os.OpenFile(filename, syscall.O_RDONLY, 0)
 	if err != nil {
