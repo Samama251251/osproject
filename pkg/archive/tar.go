@@ -13,6 +13,8 @@ type Tarball struct {
 	reader io.Reader
 }
 
+// Tarball wraps the archive stream that will be unpacked.
+
 // NewTarFile creates a tarball from a given filename.
 func NewTarFile(filename string) (Extractor, error) {
 	data, err := ioutil.ReadFile(filename)

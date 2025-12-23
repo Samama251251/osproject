@@ -29,6 +29,7 @@ func NewTarGz(r io.Reader) Extractor {
 
 // Extract extracts a Gziped tarball into dst.
 func (t *TarGz) Extract(dst string) error {
+	// Build a gzip reader so the inner tarball can be extracted with the standard tar extractor.
 	reader, err := gzip.NewReader(t.reader)
 	if err != nil {
 		return err
