@@ -42,9 +42,7 @@ func Run(cmd *cobra.Command, args []string) error {
 	defer unmount()
 
 	// Format fork options so the child process sees the same runtime flags plus mount info.
-	options := append([]string{}, rawFlags(cmd.Flags())...)
-	options = append(options, fmt.Sprintf("--root=%s", ctr.RootFS))
-	options = append(options, fmt.Sprintf("--container=%s", ctr.Digest))
+	options := buildForkArgs(cmd.Flags(), ctr)
 	newArgs := []string{"fork"}
 	newArgs = append(newArgs, options...)
 	newArgs = append(newArgs, args[1:]...)
@@ -74,6 +72,15 @@ func rawFlags(flags *pflag.FlagSet) []string {
 		flagList = append(flagList, fmt.Sprintf("--%s=%v", flag.Name, flag.Value))
 	})
 	return flagList
+}
+
+// buildForkArgs enriches CLI flags with the container metadata needed by the fork helper.
+func buildForkArgs(flags *pflag.FlagSet, ctr *container.Container) []string {
+	optionList := append([]string{}, rawFlags(flags)...)
+	return append(optionList,
+		fmt.Sprintf("--root=%s", ctr.RootFS),
+		fmt.Sprintf("--container=%s", ctr.Digest),
+	)
 }
 
 // getImage: pulls an image and download its layers if it image does not exist locally.
